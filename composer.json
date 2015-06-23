@@ -19,7 +19,7 @@
         "psr-4": { "Granam\\": "Granam/" }
     },
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.3",
         "granam/strict-object": "dev-master",
         "granam/exception-hierarchy": "dev-master"
     },
