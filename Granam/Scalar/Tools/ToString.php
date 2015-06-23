@@ -3,6 +3,10 @@ namespace Granam\Scalar\Tools;
 
 class ToString
 {
+    /**
+     * @param $value
+     * @return string
+     */
     public static function toString($value)
     {
         if (is_string($value)) {
