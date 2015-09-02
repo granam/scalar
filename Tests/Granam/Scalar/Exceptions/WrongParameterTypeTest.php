@@ -1,13 +1,23 @@
 <?php
 namespace Granam\Scalar\Exceptions;
 
-class WrongParameterTypeTest extends RuntimeTest {
+class WrongParameterTypeTest extends \PHPUnit_Framework_TestCase
+{
+
+    /**
+     * @test
+     * @expectedException \RuntimeException
+     */
+    public function Origins_at_standard_runtime_exception()
+    {
+        throw new WrongParameterType;
+    }
 
     /**
      * @test
      * @expectedException \Granam\Scalar\Exceptions\WrongParameterType
      */
-    public function can_be_thrown()
+    public function Can_be_thrown()
     {
         throw new WrongParameterType;
     }
@@ -16,7 +26,7 @@ class WrongParameterTypeTest extends RuntimeTest {
      * @test
      * @expectedException \Granam\Scalar\Exceptions\Runtime
      */
-    public function is_based_on_local_runtime_exception()
+    public function Is_tagged_by_local_runtime()
     {
         throw new WrongParameterType;
     }

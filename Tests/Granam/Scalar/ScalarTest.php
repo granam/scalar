@@ -42,49 +42,54 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function with_integer_is_string_with_that_integer()
+    public function I_can_use_it_with_integer()
     {
-        $strictScalar = new Scalar($integer = 1);
-        $this->assertSame((string)$integer, (string)$strictScalar);
+        $withInteger = new Scalar($integerValue = 1);
+        $this->assertSame($integerValue, $withInteger->getValue());
+        $this->assertSame((string)$integerValue, (string)$withInteger);
     }
     
     /**
      * @test
      */
-    public function with_float_is_string_with_that_float()
+    public function I_can_use_it_with_float()
     {
-        $strictScalar = new Scalar($float = 1.1);
-        $this->assertSame((string)$float, (string)$strictScalar);
+        $withFloat = new Scalar($floatValue = 1.1);
+        $this->assertSame($floatValue, $withFloat->getValue());
+        $this->assertSame((string)$floatValue, (string)$withFloat);
     }
 
     /**
      * @test
      */
-    public function with_false_is_empty_string()
+    public function I_can_use_it_with_false()
     {
-        $strictString = new Scalar($false = false);
-        $this->assertSame((string)$false, (string)$strictString);
-        $this->assertSame('', (string)$strictString);
+        $withFalse = new Scalar($false = false);
+        $this->assertSame(false, $withFalse->getValue());
+        $this->assertSame((string)$false, (string)$withFalse);
+        $this->assertSame('', (string)$withFalse);
     }
     
     /**
      * @test
      */
-    public function with_true_is_string_number_one()
+    public function I_can_use_it_with_true()
     {
-        $strictString = new Scalar($true = true);
-        $this->assertSame((string)$true, (string)$strictString);
-        $this->assertSame('1', (string)$strictString);
+        $withTrue = new Scalar($true = true);
+        $this->assertSame($true, $withTrue->getValue());
+        $this->assertSame((string)$true, (string)$withTrue);
+        $this->assertSame('1', (string)$withTrue);
     }
 
     /**
      * @test
      */
-    public function with_null_is_empty_string()
+    public function I_can_use_it_with_null()
     {
-        $strictString = new Scalar($null = null);
-        $this->assertSame((string)$null, (string)$strictString);
-        $this->assertSame('', (string)$strictString);
+        $withNull = new Scalar($null = null);
+        $this->assertSame($null, $withNull->getValue());
+        $this->assertSame((string)$null, (string)$withNull);
+        $this->assertSame('', (string)$withNull);
     }
 
     /**
@@ -117,10 +122,10 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function with_to_string_object_is_that_object_value_as_string()
+    public function I_can_use_it_with_to_string_object()
     {
-        $strictString = new Scalar(new TestWithToString($string = 'foo'));
-        $this->assertSame($string, (string)$strictString);
+        $strictString = new Scalar(new TestWithToString($stringValue = 'foo'));
+        $this->assertSame($stringValue, (string)$strictString);
     }
 
     /**
@@ -131,8 +136,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
         $invalidToStringScalar = new TestInvalidToStringScalar('foo', false);
         $errors = [];
         set_error_handler(
-            function ($errno) use (&$errors) {
-                $errors[] = $errno;
+            function ($errorNumber) use (&$errors) {
+                $errors[] = $errorNumber;
             },
             E_USER_WARNING
         );

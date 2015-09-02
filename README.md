@@ -10,6 +10,8 @@ For that reason, if we want to be sure about scalar type, a scalar converter and
 
 Warning: The converter and so the wrapper class do not cast null - it remains null.
 
+Note: requires PHP 5.4+
+
 ```php
 <?php
 namespace Granam\Scalar;
