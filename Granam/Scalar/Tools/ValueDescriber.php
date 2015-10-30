@@ -15,7 +15,12 @@ class ValueDescriber
         }
 
         if (is_object($value)) {
-            return 'instance of ' . get_class($value);
+            $description = 'instance of ' . get_class($value);
+            if (is_callable([$value, '__toString'])) {
+                $description .= ' (' . $value . ')';
+            }
+
+            return $description;
         }
 
         return gettype($value);

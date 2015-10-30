@@ -1,6 +1,8 @@
 <?php
 namespace Granam\Scalar\Tools;
 
+use Granam\Strict\Object\StrictObject;
+
 class ValueDescriberTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -31,6 +33,11 @@ class ValueDescriberTest extends \PHPUnit_Framework_TestCase
     public function I_can_describe_object()
     {
         $this->assertSame('instance of stdClass', $this->describer->describe(new \stdClass()));
+        $value = 'foo';
+        $this->assertSame(
+            'instance of ' . ToStringObject::getClass() . " ($value)",
+            $this->describer->describe(new ToStringObject($value))
+        );
     }
 
     /**
@@ -38,7 +45,24 @@ class ValueDescriberTest extends \PHPUnit_Framework_TestCase
      */
     public function I_can_describe_array_and_resource()
     {
-        $this->assertSame('array', $this->describer->describe(array()));
+        $this->assertSame('array', $this->describer->describe([]));
         $this->assertSame('resource', $this->describer->describe(tmpfile()));
+    }
+}
+
+/** inner */
+class ToStringObject extends StrictObject
+{
+
+    private $value;
+
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
+
+    public function __toString()
+    {
+        return (string)$this->value;
     }
 }
