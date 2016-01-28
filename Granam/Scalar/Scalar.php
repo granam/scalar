@@ -3,7 +3,7 @@ namespace Granam\Scalar;
 
 use Granam\Scalar\Tools\ToScalar;
 use Granam\Scalar\Tools\ToString;
-use Granam\Scalar\Tools\ValueDescriber;
+use Granam\Tools\ValueDescriber;
 use Granam\Strict\Object\StrictObject;
 
 class Scalar extends StrictObject implements ScalarInterface

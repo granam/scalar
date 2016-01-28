@@ -21,10 +21,11 @@
     "require": {
         "php": ">=5.4",
         "granam/strict-object": "dev-master",
-        "granam/exception-hierarchy": "dev-master"
+        "granam/tools": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.4",
-        "mockery/mockery": ">=0.9"
+        "mockery/mockery": "dev-master",
+        "granam/exception-hierarchy": "dev-master"
     }
 }

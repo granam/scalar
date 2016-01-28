@@ -1,6 +1,8 @@
 <?php
 namespace Granam\Scalar\Tools;
 
+use Granam\Tools\ValueDescriber;
+
 class ToScalar
 {
 
