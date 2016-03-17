@@ -1,23 +1,25 @@
 <?php
-namespace Granam\Scalar\Tools;
+namespace Granam\Tests\Scalar\Tools;
+
+use Granam\Scalar\Tools\ToScalar;
 
 class ToScalarTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
     public function Scalar_values_remain_untouched()
     {
-        $this->assertSame('foo', ToScalar::toScalar('foo'));
-        $this->assertSame('foo', ToScalar::toScalar('foo', true /* strict */));
-        $this->assertSame(123456, ToScalar::toScalar(123456));
-        $this->assertSame(123456, ToScalar::toScalar(123456, true /* strict */));
-        $this->assertSame(123456.789654, ToScalar::toScalar(123456.789654));
-        $this->assertSame(123456.789654, ToScalar::toScalar(123456.789654, true /* strict */));
-        $this->assertSame(0.9999999999, ToScalar::toScalar(0.9999999999));
-        $this->assertSame(0.9999999999, ToScalar::toScalar(0.9999999999, true /* strict */));
-        $this->assertSame(false, ToScalar::toScalar(false));
-        $this->assertSame(false, ToScalar::toScalar(false, true /* strict */));
-        $this->assertSame(true, ToScalar::toScalar(true));
-        $this->assertSame(true, ToScalar::toScalar(true, true /* strict */));
+        self::assertSame('foo', ToScalar::toScalar('foo'));
+        self::assertSame('foo', ToScalar::toScalar('foo', true /* strict */));
+        self::assertSame(123456, ToScalar::toScalar(123456));
+        self::assertSame(123456, ToScalar::toScalar(123456, true /* strict */));
+        self::assertSame(123456.789654, ToScalar::toScalar(123456.789654));
+        self::assertSame(123456.789654, ToScalar::toScalar(123456.789654, true /* strict */));
+        self::assertSame(0.9999999999, ToScalar::toScalar(0.9999999999));
+        self::assertSame(0.9999999999, ToScalar::toScalar(0.9999999999, true /* strict */));
+        self::assertFalse(ToScalar::toScalar(false));
+        self::assertFalse(ToScalar::toScalar(false, true /* strict */));
+        self::assertTrue(ToScalar::toScalar(true));
+        self::assertTrue(ToScalar::toScalar(true, true /* strict */));
     }
 
     /**
@@ -25,7 +27,7 @@ class ToScalarTest extends \PHPUnit_Framework_TestCase
      */
     public function I_can_pass_through_with_null_if_not_strict()
     {
-        $this->assertSame(null, ToScalar::toScalar(null));
+        self::assertNull(ToScalar::toScalar(null));
     }
 
     /**
@@ -71,7 +73,7 @@ class ToScalarTest extends \PHPUnit_Framework_TestCase
     public function with_to_string_object_is_that_object_value_as_string()
     {
         $objectWithToString = new TestWithToString($string = 'foo');
-        $this->assertSame($string, ToScalar::toScalar($objectWithToString));
+        self::assertSame($string, ToScalar::toScalar($objectWithToString));
     }
 
 }

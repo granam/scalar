@@ -1,5 +1,7 @@
 <?php
-namespace Granam\Scalar;
+namespace Granam\Tests\Tools\Scalar;
+
+use Granam\Scalar\Scalar;
 
 class ScalarTest extends \PHPUnit_Framework_TestCase
 {
@@ -7,36 +9,36 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function can_create_instance()
     {
         $instance = new Scalar('foo');
-        $this->assertNotNull($instance);
+        self::assertNotNull($instance);
     }
 
     /** @test */
     public function has_local_interface()
     {
         $instance = new Scalar('foo');
-        $this->assertInstanceOf('Granam\Scalar\ScalarInterface', $instance);
+        self::assertInstanceOf('Granam\Scalar\ScalarInterface', $instance);
     }
 
     /** @test */
     public function can_be_turned_into_string()
     {
         $stringScalar = new Scalar($string = 'foo');
-        $this->assertSame($string, (string)$stringScalar);
+        self::assertSame($string, (string)$stringScalar);
 
         $integerScalar = new Scalar($integer = 123456);
-        $this->assertSame((string)$integer, (string)$integerScalar);
+        self::assertSame((string)$integer, (string)$integerScalar);
 
         $floatScalar = new Scalar($float = 123456.789654);
-        $this->assertSame((string)$float, (string)$floatScalar);
+        self::assertSame((string)$float, (string)$floatScalar);
 
         $almostIntegerFloatScalar = new Scalar($almostIntegerFloat = 0.9999999999);
-        $this->assertSame((string)$almostIntegerFloat, (string)$almostIntegerFloatScalar);
+        self::assertSame((string)$almostIntegerFloat, (string)$almostIntegerFloatScalar);
 
         $falseScalar = new Scalar($false = false);
-        $this->assertSame((string)$false, (string)$falseScalar);
+        self::assertSame((string)$false, (string)$falseScalar);
 
         $trueScalar = new Scalar($true = true);
-        $this->assertSame((string)$true, (string)$trueScalar);
+        self::assertSame((string)$true, (string)$trueScalar);
     }
 
     /**
@@ -45,8 +47,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_integer()
     {
         $withInteger = new Scalar($integerValue = 1);
-        $this->assertSame($integerValue, $withInteger->getValue());
-        $this->assertSame((string)$integerValue, (string)$withInteger);
+        self::assertSame($integerValue, $withInteger->getValue());
+        self::assertSame((string)$integerValue, (string)$withInteger);
     }
     
     /**
@@ -55,8 +57,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_float()
     {
         $withFloat = new Scalar($floatValue = 1.1);
-        $this->assertSame($floatValue, $withFloat->getValue());
-        $this->assertSame((string)$floatValue, (string)$withFloat);
+        self::assertSame($floatValue, $withFloat->getValue());
+        self::assertSame((string)$floatValue, (string)$withFloat);
     }
 
     /**
@@ -65,9 +67,9 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_false()
     {
         $withFalse = new Scalar($false = false);
-        $this->assertSame(false, $withFalse->getValue());
-        $this->assertSame((string)$false, (string)$withFalse);
-        $this->assertSame('', (string)$withFalse);
+        self::assertSame(false, $withFalse->getValue());
+        self::assertSame((string)$false, (string)$withFalse);
+        self::assertSame('', (string)$withFalse);
     }
     
     /**
@@ -76,9 +78,9 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_true()
     {
         $withTrue = new Scalar($true = true);
-        $this->assertSame($true, $withTrue->getValue());
-        $this->assertSame((string)$true, (string)$withTrue);
-        $this->assertSame('1', (string)$withTrue);
+        self::assertSame($true, $withTrue->getValue());
+        self::assertSame((string)$true, (string)$withTrue);
+        self::assertSame('1', (string)$withTrue);
     }
 
     /**
@@ -87,9 +89,9 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_null()
     {
         $withNull = new Scalar($null = null);
-        $this->assertSame($null, $withNull->getValue());
-        $this->assertSame((string)$null, (string)$withNull);
-        $this->assertSame('', (string)$withNull);
+        self::assertSame($null, $withNull->getValue());
+        self::assertSame((string)$null, (string)$withNull);
+        self::assertSame('', (string)$withNull);
     }
 
     /**
@@ -125,7 +127,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_to_string_object()
     {
         $strictString = new Scalar(new TestWithToString($stringValue = 'foo'));
-        $this->assertSame($stringValue, (string)$strictString);
+        self::assertSame($stringValue, (string)$strictString);
     }
 
     /**
@@ -141,12 +143,12 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
             },
             E_USER_WARNING
         );
-        $this->assertEmpty($errors);
-        $this->assertSame('', $invalidToStringScalar->__toString());
+        self::assertEmpty($errors);
+        self::assertSame('', (string)$invalidToStringScalar);
         restore_error_handler();
-        $this->assertNotEmpty($errors);
-        $this->assertCount(1, $errors);
-        $this->assertSame(E_USER_WARNING, $errors[0]);
+        self::assertNotEmpty($errors);
+        self::assertCount(1, $errors);
+        self::assertSame(E_USER_WARNING, $errors[0]);
     }
 
 }
