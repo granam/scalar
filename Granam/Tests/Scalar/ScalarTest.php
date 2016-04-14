@@ -5,22 +5,24 @@ use Granam\Scalar\Scalar;
 
 class ScalarTest extends \PHPUnit_Framework_TestCase
 {
-    /** @test */
-    public function can_create_instance()
+    /**
+     * @test
+     */
+    public function I_can_create_it()
     {
-        $instance = new Scalar('foo');
-        self::assertNotNull($instance);
+        $scalar = new Scalar('foo');
+        self::assertNotNull($scalar);
+        self::assertInstanceOf(
+            'Granam\Scalar\ScalarInterface',
+            $scalar,
+            'Scalar object has to implement Granam\Scalar\ScalarInterface'
+        );
     }
 
-    /** @test */
-    public function has_local_interface()
-    {
-        $instance = new Scalar('foo');
-        self::assertInstanceOf('Granam\Scalar\ScalarInterface', $instance);
-    }
-
-    /** @test */
-    public function can_be_turned_into_string()
+    /**
+     * @test
+     */
+    public function I_can_turn_it_into_string()
     {
         $stringScalar = new Scalar($string = 'foo');
         self::assertSame($string, (string)$stringScalar);
@@ -50,7 +52,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
         self::assertSame($integerValue, $withInteger->getValue());
         self::assertSame((string)$integerValue, (string)$withInteger);
     }
-    
+
     /**
      * @test
      */
@@ -71,7 +73,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
         self::assertSame((string)$false, (string)$withFalse);
         self::assertSame('', (string)$withFalse);
     }
-    
+
     /**
      * @test
      */
@@ -86,9 +88,9 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_null()
+    public function I_can_use_it_with_null_if_not_strict()
     {
-        $withNull = new Scalar($null = null);
+        $withNull = new Scalar($null = null, false /* not strict */);
         self::assertSame($null, $withNull->getValue());
         self::assertSame((string)$null, (string)$withNull);
         self::assertSame('', (string)$withNull);
@@ -96,27 +98,50 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Exceptions\WrongParameterType
+     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @expectedExceptionMessageRegExp ~got NULL$~
      */
-    public function throws_exception_with_array()
+    public function I_can_not_use_it_with_null_by_default()
+    {
+        new Scalar(null);
+    }
+
+    /**
+     * @test
+     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @expectedExceptionMessageRegExp ~got NULL$~
+     */
+    public function I_can_not_use_it_with_null_if_strict()
+    {
+        new Scalar(null, true /* strict */);
+    }
+
+    /**
+     * @test
+     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @expectedExceptionMessageRegExp ~got array$~
+     */
+    public function I_can_not_use_array()
     {
         new Scalar([]);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Exceptions\WrongParameterType
+     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @expectedExceptionMessageRegExp ~got resource$~
      */
-    public function throws_exception_with_resource()
+    public function I_can_not_use_resource()
     {
         new Scalar(tmpfile());
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Exceptions\WrongParameterType
+     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
      */
-    public function throws_exception_with_object()
+    public function I_can_not_use_standard_object()
     {
         new Scalar(new \stdClass());
     }
@@ -133,7 +158,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function invalid_casted_to_string_cause_warning()
+    public function I_got_empty_string_and_warning_on_invalid_to_string_conversion()
     {
         $invalidToStringScalar = new TestInvalidToStringScalar('foo', false);
         $errors = [];

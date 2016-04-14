@@ -1,6 +1,8 @@
 <?php
 namespace Granam\Scalar\Tools;
 
+use Granam\Tools\ValueDescriber;
+
 class ToString
 {
     /**
@@ -13,10 +15,12 @@ class ToString
             return $value;
         }
 
-        if (is_scalar($value) || is_null($value) || (is_object($value) && method_exists($value, '__toString'))) {
+        if (is_scalar($value) || $value === null || (is_object($value) && method_exists($value, '__toString'))) {
             return (string)$value;
         }
 
-        throw new Exceptions\WrongParameterType('Expected scalar, null or to string object, got ' . gettype($value));
+        throw new Exceptions\WrongParameterType(
+            'Expected scalar or object with __toString method, got ' . ValueDescriber::describe($value)
+        );
     }
 }

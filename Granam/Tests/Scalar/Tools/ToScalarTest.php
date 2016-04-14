@@ -27,7 +27,17 @@ class ToScalarTest extends \PHPUnit_Framework_TestCase
      */
     public function I_can_pass_through_with_null_if_not_strict()
     {
-        self::assertNull(ToScalar::toScalar(null));
+        self::assertNull(ToScalar::toScalar(null, false /* not strict */));
+    }
+
+    /**
+     * @test
+     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
+     * @expectedExceptionMessageRegExp ~got NULL$~
+     */
+    public function I_cannot_pass_through_with_null_by_default()
+    {
+        ToScalar::toScalar(null);
     }
 
     /**
