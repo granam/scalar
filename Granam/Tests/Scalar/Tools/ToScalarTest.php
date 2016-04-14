@@ -82,24 +82,8 @@ class ToScalarTest extends \PHPUnit_Framework_TestCase
      */
     public function with_to_string_object_is_that_object_value_as_string()
     {
-        $objectWithToString = new TestWithToString($string = 'foo');
+        $objectWithToString = new TestObjectWithToString($string = 'foo');
         self::assertSame($string, ToScalar::toScalar($objectWithToString));
     }
 
-}
-
-/** inner */
-class TestWithToString
-{
-    private $value;
-
-    public function __construct($value)
-    {
-        $this->value = $value;
-    }
-
-    public function __toString()
-    {
-        return (string)$this->value;
-    }
 }

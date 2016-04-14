@@ -39,7 +39,7 @@ class Scalar extends StrictObject implements ScalarInterface
     public function __toString()
     {
         try {
-            return ToString::toString($this->getValue());
+            return ToString::toString($this->getValue(), false /* not strict */);
         } catch (\Exception $exception) {
             /** __toString MUST NOT throw an exception, @link http://php.net/manual/en/language.oop5.magic.php#object.tostring */
             trigger_error(
