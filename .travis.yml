@@ -1,3 +1,5 @@
+sudo: false # @link https://docs.travis-ci.com/user/workers/container-based-infrastructure/
+
 language: php
 php:
   - 7.0
