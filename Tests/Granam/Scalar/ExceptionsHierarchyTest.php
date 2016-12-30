@@ -1,9 +1,9 @@
 <?php
 namespace Granam\Scalar;
 
-use Granam\Exceptions\Tests\Tools\AbstractTestOfExceptionsHierarchy;
+use Granam\Tests\Exceptions\Tools\AbstractExceptionsHierarchyTest;
 
-class ExceptionsHierarchyTest extends AbstractTestOfExceptionsHierarchy
+class ExceptionsHierarchyTest extends AbstractExceptionsHierarchyTest
 {
     protected function getTestedNamespace()
     {
@@ -13,11 +13,6 @@ class ExceptionsHierarchyTest extends AbstractTestOfExceptionsHierarchy
     protected function getRootNamespace()
     {
         return $this->getTestedNamespace();
-    }
-
-    protected function getExternalRootNamespace()
-    {
-        return '\Granam';
     }
 
 }
