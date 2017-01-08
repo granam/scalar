@@ -8,6 +8,7 @@ class ToStringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider provideScalarValue
+     * @param $scalarValue
      */
     public function I_get_scalar_values_as_string($scalarValue)
     {
@@ -42,7 +43,7 @@ class ToStringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got NULL$~
+     * @expectedExceptionMessageRegExp ~^In strict mode .+got NULL$~
      */
     public function I_cannot_pass_through_with_null_by_default()
     {
@@ -52,7 +53,7 @@ class ToStringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got NULL$~
+     * @expectedExceptionMessageRegExp ~In strict mode .+got NULL$~
      */
     public function I_cannot_pass_through_with_null_if_strict()
     {
@@ -62,7 +63,7 @@ class ToStringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got array$~
+     * @expectedExceptionMessageRegExp ~^Expected .+got array$~
      */
     public function Throws_exception_with_array()
     {

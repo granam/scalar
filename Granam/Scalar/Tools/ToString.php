@@ -23,11 +23,16 @@ class ToString
         ) {
             return (string)$value;
         }
+        if ($strict) {
+            if ($value !== null) {
+                $message = 'Expected scalar or object with __toString method, got ' . ValueDescriber::describe($value);
+            } else {
+                $message = 'In strict mode expected scalar or object with __toString method, got ' . ValueDescriber::describe($value);
+            }
+        } else {
+            $message = 'Expected scalar, NULL or object with __toString method, got ' . ValueDescriber::describe($value);
+        }
 
-        throw new Exceptions\WrongParameterType(
-            $strict
-                ? 'In strict mode expected scalar or object with __toString method, got ' . ValueDescriber::describe($value)
-                : 'In non-strict mode expected scalar, NULL or object with __toString method, got ' . ValueDescriber::describe($value)
-        );
+        throw new Exceptions\WrongParameterType($message);
     }
 }
