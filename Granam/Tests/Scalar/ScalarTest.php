@@ -139,7 +139,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
+     * @expectedExceptionMessageRegExp ~got instance of stdClass$~
      */
     public function I_can_not_use_standard_object()
     {

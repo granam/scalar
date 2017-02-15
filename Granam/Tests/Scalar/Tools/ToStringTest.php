@@ -28,7 +28,7 @@ class ToStringTest extends \PHPUnit_Framework_TestCase
             [false],
             [true],
             [0],
-            ['']
+            [''],
         ];
     }
 
@@ -83,7 +83,7 @@ class ToStringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
+     * @expectedExceptionMessageRegExp ~got instance of stdClass$~
      */
     public function Throws_exception_with_object()
     {
