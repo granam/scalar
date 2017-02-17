@@ -2,8 +2,9 @@
 namespace Granam\Tests\Scalar\Tools;
 
 use Granam\Scalar\Tools\ToString;
+use PHPUnit\Framework\TestCase;
 
-class ToStringTest extends \PHPUnit_Framework_TestCase
+class ToStringTest extends TestCase
 {
     /**
      * @test

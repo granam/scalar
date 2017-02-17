@@ -2,8 +2,9 @@
 namespace Granam\Tests\Scalar\Tools;
 
 use Granam\Scalar\Tools\ToScalar;
+use PHPUnit\Framework\TestCase;
 
-class ToScalarTest extends \PHPUnit_Framework_TestCase
+class ToScalarTest extends TestCase
 {
     /** @test */
     public function Scalar_values_remain_untouched()

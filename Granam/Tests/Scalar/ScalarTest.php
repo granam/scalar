@@ -2,8 +2,10 @@
 namespace Granam\Tests\Tools\Scalar;
 
 use Granam\Scalar\Scalar;
+use Granam\Scalar\ScalarInterface;
+use PHPUnit\Framework\TestCase;
 
-class ScalarTest extends \PHPUnit_Framework_TestCase
+class ScalarTest extends TestCase
 {
     /**
      * @test
@@ -13,7 +15,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
         $scalar = new Scalar('foo');
         self::assertNotNull($scalar);
         self::assertInstanceOf(
-            'Granam\Scalar\ScalarInterface',
+            ScalarInterface::class,
             $scalar,
             'Scalar object has to implement Granam\Scalar\ScalarInterface'
         );
@@ -69,7 +71,7 @@ class ScalarTest extends \PHPUnit_Framework_TestCase
     public function I_can_use_it_with_false()
     {
         $withFalse = new Scalar($false = false);
-        self::assertSame(false, $withFalse->getValue());
+        self::assertFalse($withFalse->getValue());
         self::assertSame((string)$false, (string)$withFalse);
         self::assertSame('', (string)$withFalse);
     }
