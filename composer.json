@@ -22,13 +22,13 @@
   },
   "require": {
     "php": ">=7.0",
-    "granam/strict-object": "dev-master",
-    "granam/tools": "dev-master"
+    "granam/tools": "^2.0",
+    "granam/strict-object": "^2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~6.0",
     "mockery/mockery": ">=0.9",
-    "granam/exceptions-hierarchy": "dev-master"
+    "granam/exceptions-hierarchy": "~4.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
