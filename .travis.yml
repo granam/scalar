@@ -1,7 +1,6 @@
 language: php
 php:
   - hhvm
-  - nightly
   - 7.1
   - 7.0
 matrix:
