@@ -121,7 +121,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got array$~
+     * @expectedExceptionMessageRegExp ~got array {}$~
      */
     public function I_can_not_use_array()
     {

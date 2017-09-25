@@ -64,7 +64,7 @@ class ToStringTest extends TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~^Expected .+got array$~
+     * @expectedExceptionMessageRegExp ~^Expected .+got array {}$~
      */
     public function Throws_exception_with_array()
     {
