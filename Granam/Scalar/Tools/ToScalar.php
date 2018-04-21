@@ -1,9 +1,10 @@
 <?php
 namespace Granam\Scalar\Tools;
 
+use Granam\Strict\Object\StrictObject;
 use Granam\Tools\ValueDescriber;
 
-class ToScalar
+class ToScalar extends StrictObject
 {
 
     /**
@@ -15,7 +16,7 @@ class ToScalar
      */
     public static function toScalar($value, $strict = true)
     {
-        if (is_scalar($value)) {
+        if (\is_scalar($value)) {
             return $value;
         }
 

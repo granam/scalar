@@ -15,12 +15,12 @@ class Scalar extends StrictObject implements ScalarInterface
     protected $value;
 
     /**
-     * @param bool|float|int|string|null|object $value
+     * @param bool|float|int|string|null|ScalarInterface $value
      * @param bool $strict = true Raises an exception on NULL by default
      *
      * @throws \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
-    public function __construct($value, $strict = true)
+    public function __construct($value, bool $strict = true)
     {
         $this->value = ToScalar::toScalar($value, $strict);
     }

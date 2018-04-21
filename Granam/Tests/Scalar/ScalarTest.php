@@ -10,7 +10,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_create_it()
+    public function I_can_create_it(): void
     {
         $scalar = new Scalar('foo');
         self::assertNotNull($scalar);
@@ -24,7 +24,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_turn_it_into_string()
+    public function I_can_turn_it_into_string(): void
     {
         $stringScalar = new Scalar($string = 'foo');
         self::assertSame($string, (string)$stringScalar);
@@ -48,7 +48,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_integer()
+    public function I_can_use_it_with_integer(): void
     {
         $withInteger = new Scalar($integerValue = 1);
         self::assertSame($integerValue, $withInteger->getValue());
@@ -58,7 +58,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_float()
+    public function I_can_use_it_with_float(): void
     {
         $withFloat = new Scalar($floatValue = 1.1);
         self::assertSame($floatValue, $withFloat->getValue());
@@ -68,7 +68,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_false()
+    public function I_can_use_it_with_false(): void
     {
         $withFalse = new Scalar($false = false);
         self::assertFalse($withFalse->getValue());
@@ -79,7 +79,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_true()
+    public function I_can_use_it_with_true(): void
     {
         $withTrue = new Scalar($true = true);
         self::assertSame($true, $withTrue->getValue());
@@ -90,7 +90,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_null_if_not_strict()
+    public function I_can_use_it_with_null_if_not_strict(): void
     {
         $withNull = new Scalar($null = null, false /* not strict */);
         self::assertSame($null, $withNull->getValue());
@@ -103,7 +103,7 @@ class ScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got NULL$~
      */
-    public function I_can_not_use_it_with_null_by_default()
+    public function I_can_not_use_it_with_null_by_default(): void
     {
         new Scalar(null);
     }
@@ -113,7 +113,7 @@ class ScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got NULL$~
      */
-    public function I_can_not_use_it_with_null_if_strict()
+    public function I_can_not_use_it_with_null_if_strict(): void
     {
         new Scalar(null, true /* strict */);
     }
@@ -123,7 +123,7 @@ class ScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got array {}$~
      */
-    public function I_can_not_use_array()
+    public function I_can_not_use_array(): void
     {
         new Scalar([]);
     }
@@ -133,7 +133,7 @@ class ScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got resource$~
      */
-    public function I_can_not_use_resource()
+    public function I_can_not_use_resource(): void
     {
         new Scalar(tmpfile());
     }
@@ -143,7 +143,7 @@ class ScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
      */
-    public function I_can_not_use_standard_object()
+    public function I_can_not_use_standard_object(): void
     {
         new Scalar(new \stdClass());
     }
@@ -151,7 +151,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_use_it_with_to_string_object()
+    public function I_can_use_it_with_to_string_object(): void
     {
         $strictString = new Scalar(new TestWithToString($stringValue = 'foo'));
         self::assertSame($stringValue, (string)$strictString);
@@ -160,7 +160,7 @@ class ScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_got_empty_string_and_warning_on_invalid_to_string_conversion()
+    public function I_got_empty_string_and_warning_on_invalid_to_string_conversion(): void
     {
         $invalidToStringScalar = new TestInvalidToStringScalar('foo', false);
         $errors = [];

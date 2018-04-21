@@ -1,25 +1,27 @@
 <?php
 namespace Granam\Scalar\Tools;
 
+use Granam\Scalar\ScalarInterface;
+use Granam\Strict\Object\StrictObject;
 use Granam\Tools\ValueDescriber;
 
-class ToString
+class ToString extends StrictObject
 {
     /**
-     * @param $value
+     * @param null|int|float|string|ScalarInterface $value
      * @param bool $strict = true NULL raises an exception
      * @return string
      * @throws \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
-    public static function toString($value, $strict = true)
+    public static function toString($value, bool $strict = true): string
     {
-        if (is_string($value)) {
+        if (\is_string($value)) {
             return $value;
         }
 
-        if (is_scalar($value)
+        if (\is_scalar($value)
             || ($value === null && !$strict)
-            || (is_object($value) && method_exists($value, '__toString'))
+            || (\is_object($value) && \method_exists($value, '__toString'))
         ) {
             return (string)$value;
         }

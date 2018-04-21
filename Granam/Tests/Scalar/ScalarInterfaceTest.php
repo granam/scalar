@@ -6,14 +6,19 @@ use PHPUnit\Framework\TestCase;
 
 class ScalarInterfaceTest extends TestCase
 {
-    /** @test */
-    public function interface_exists()
+    /**
+     * @test
+     */
+    public function interface_exists(): void
     {
         self::assertTrue(interface_exists(ScalarInterface::class));
     }
 
-    /** @test */
-    public function has_expected_methods()
+    /**
+     * @test
+     * @throws \ReflectionException
+     */
+    public function has_expected_methods(): void
     {
         $reflection = new \ReflectionClass(ScalarInterface::class);
         self::assertTrue($reflection->hasMethod('__toString'));
