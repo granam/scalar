@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Granam\Tests\Tools\Scalar;
 
 use Granam\Scalar\Scalar;
@@ -125,6 +127,7 @@ class ScalarTest extends TestCase
      */
     public function I_can_not_use_array(): void
     {
+        /** @noinspection PhpParamsInspection */
         new Scalar([]);
     }
 

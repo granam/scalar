@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Granam\Tests\Scalar\Tools;
 
 use Granam\Scalar\Tools\ToScalar;
@@ -7,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class ToScalarTest extends TestCase
 {
     /** @test */
-    public function Scalar_values_remain_untouched()
+    public function Scalar_values_remain_untouched(): void
     {
         self::assertSame('foo', ToScalar::toScalar('foo'));
         self::assertSame('foo', ToScalar::toScalar('foo', true /* strict */));
@@ -26,7 +28,7 @@ class ToScalarTest extends TestCase
     /**
      * @test
      */
-    public function I_can_pass_through_with_null_if_not_strict()
+    public function I_can_pass_through_with_null_if_not_strict(): void
     {
         self::assertNull(ToScalar::toScalar(null, false /* not strict */));
     }
@@ -36,7 +38,7 @@ class ToScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got NULL$~
      */
-    public function I_cannot_pass_through_with_null_by_default()
+    public function I_cannot_pass_through_with_null_by_default(): void
     {
         ToScalar::toScalar(null);
     }
@@ -46,7 +48,7 @@ class ToScalarTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got NULL$~
      */
-    public function I_cannot_pass_through_with_null_if_strict()
+    public function I_cannot_pass_through_with_null_if_strict(): void
     {
         ToScalar::toScalar(null, true /* strict */);
     }
@@ -55,8 +57,9 @@ class ToScalarTest extends TestCase
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
-    public function Throws_exception_with_array()
+    public function Throws_exception_with_array(): void
     {
+        /** @noinspection PhpParamsInspection */
         ToScalar::toScalar([]);
     }
 
@@ -64,16 +67,16 @@ class ToScalarTest extends TestCase
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
-    public function Throws_exception_with_resource()
+    public function Throws_exception_with_resource(): void
     {
-        ToScalar::toScalar(tmpfile());
+        ToScalar::toScalar(\tmpfile());
     }
 
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
-    public function Throws_exception_with_object()
+    public function Throws_exception_with_object(): void
     {
         ToScalar::toScalar(new \stdClass());
     }
@@ -81,10 +84,9 @@ class ToScalarTest extends TestCase
     /**
      * @test
      */
-    public function with_to_string_object_is_that_object_value_as_string()
+    public function with_to_string_object_is_that_object_value_as_string(): void
     {
         $objectWithToString = new TestObjectWithToString($string = 'foo');
         self::assertSame($string, ToScalar::toScalar($objectWithToString));
     }
-
 }

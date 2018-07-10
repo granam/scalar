@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Granam\Tests\Scalar\Tools;
 
 use Granam\Scalar\Tools\ToString;
@@ -11,14 +13,14 @@ class ToStringTest extends TestCase
      * @dataProvider provideScalarValue
      * @param $scalarValue
      */
-    public function I_get_scalar_values_as_string($scalarValue)
+    public function I_get_scalar_values_as_string($scalarValue): void
     {
         self::assertSame((string)$scalarValue, ToString::toString($scalarValue /* default */));
         self::assertSame((string)$scalarValue, ToString::toString($scalarValue, true /* strict */));
         self::assertSame((string)$scalarValue, ToString::toString($scalarValue, false /* not strict */));
     }
 
-    public function provideScalarValue()
+    public function provideScalarValue(): array
     {
         return [
             ['foo'],
@@ -36,7 +38,7 @@ class ToStringTest extends TestCase
     /**
      * @test
      */
-    public function I_get_empty_string_from_null_if_not_strict()
+    public function I_get_empty_string_from_null_if_not_strict(): void
     {
         self::assertSame('', ToString::toString(null, false /* not strict */));
     }
@@ -46,7 +48,7 @@ class ToStringTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~^In strict mode .+got NULL$~
      */
-    public function I_cannot_pass_through_with_null_by_default()
+    public function I_cannot_pass_through_with_null_by_default(): void
     {
         ToString::toString(null);
     }
@@ -56,7 +58,7 @@ class ToStringTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~In strict mode .+got NULL$~
      */
-    public function I_cannot_pass_through_with_null_if_strict()
+    public function I_cannot_pass_through_with_null_if_strict(): void
     {
         ToString::toString(null, true /* strict */);
     }
@@ -66,8 +68,9 @@ class ToStringTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~^Expected .+got array {}$~
      */
-    public function Throws_exception_with_array()
+    public function Throws_exception_with_array(): void
     {
+        /** @noinspection PhpParamsInspection */
         ToString::toString([]);
     }
 
@@ -76,9 +79,9 @@ class ToStringTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got resource$~
      */
-    public function Throws_exception_with_resource()
+    public function Throws_exception_with_resource(): void
     {
-        ToString::toString(tmpfile());
+        ToString::toString(\tmpfile());
     }
 
     /**
@@ -86,7 +89,7 @@ class ToStringTest extends TestCase
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
      */
-    public function Throws_exception_with_object()
+    public function Throws_exception_with_object(): void
     {
         ToString::toString(new \stdClass());
     }
@@ -94,10 +97,9 @@ class ToStringTest extends TestCase
     /**
      * @test
      */
-    public function I_get_value_from_to_string_object()
+    public function I_get_value_from_to_string_object(): void
     {
         $objectWithToString = new TestObjectWithToString($string = 'foo');
         self::assertSame($string, ToString::toString($objectWithToString));
     }
-
 }

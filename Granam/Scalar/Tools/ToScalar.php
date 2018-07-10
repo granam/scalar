@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Granam\Scalar\Tools;
 
 use Granam\Strict\Object\StrictObject;
@@ -14,7 +16,7 @@ class ToScalar extends StrictObject
      * @return int|float|null|string
      * @throws \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
-    public static function toScalar($value, $strict = true)
+    public static function toScalar($value, bool $strict = true)
     {
         if (\is_scalar($value)) {
             return $value;
