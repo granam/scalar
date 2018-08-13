@@ -45,6 +45,14 @@ class ToStringTest extends TestCase
 
     /**
      * @test
+     */
+    public function I_can_get_string_or_null_by_specialized_method(): void
+    {
+        self::assertNull(ToString::toStringOrNull(null));
+    }
+
+    /**
+     * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      * @expectedExceptionMessageRegExp ~^In strict mode .+got NULL$~
      */
@@ -66,7 +74,7 @@ class ToStringTest extends TestCase
     /**
      * @test
      * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~^Expected .+got array {}$~
+     * @expectedExceptionMessageRegExp ~array {}$~
      */
     public function Throws_exception_with_array(): void
     {
