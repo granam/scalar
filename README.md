@@ -2,13 +2,11 @@
 
 [![Build Status](https://travis-ci.org/jaroslavtyc/granam-scalar.svg?branch=master)](https://travis-ci.org/jaroslavtyc/granam-scalar)
 
-PHP provide scalar type hinting since [PHP 7.0](https://wiki.php.net/rfc/scalar_type_hints#proposed_php_version_s).
-That is still quite far.
-And no native function is able to cast or sanitize a value to scalar with error on value lost.
+PHP provide scalar type hinting since [PHP 7.0](https://wiki.php.net/rfc/scalar_type_hints), but no native function is able to protect us against value lost on cast.
 
 For that reason, if we want to be sure about scalar type, a scalar converter and optionally a type-checking class are the only chance.
 
-Warning: The converter and so the wrapper class do not cast null - it remains null.
+Warning: The converter and so the wrapper class does not cast null - it remains null.
 
 ```php
 <?php
