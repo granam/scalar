@@ -23,7 +23,7 @@
   "require": {
     "php": ">=7.1",
     "granam/strict-object": "^3.0",
-    "granam/tools": "^4.0"
+    "granam/tools": "^5.0"
   },
   "require-dev": {
     "mockery/mockery": "^1.2",
