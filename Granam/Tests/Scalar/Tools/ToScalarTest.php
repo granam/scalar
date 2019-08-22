@@ -1,8 +1,8 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Granam\Tests\Scalar\Tools;
 
+use Granam\Scalar\Tools\Exceptions\WrongParameterType;
 use Granam\Scalar\Tools\ToScalar;
 use PHPUnit\Framework\TestCase;
 
@@ -35,49 +35,49 @@ class ToScalarTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got NULL$~
      */
     public function I_cannot_pass_through_with_null_by_default(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~got NULL$~');
         ToScalar::toScalar(null);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got NULL$~
      */
     public function I_cannot_pass_through_with_null_if_strict(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~got NULL$~');
         ToScalar::toScalar(null, true /* strict */);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
     public function Throws_exception_with_array(): void
     {
+        $this->expectException(WrongParameterType::class);
         /** @noinspection PhpParamsInspection */
         ToScalar::toScalar([]);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
     public function Throws_exception_with_resource(): void
     {
+        $this->expectException(WrongParameterType::class);
         ToScalar::toScalar(\tmpfile());
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
      */
     public function Throws_exception_with_object(): void
     {
+        $this->expectException(WrongParameterType::class);
         ToScalar::toScalar(new \stdClass());
     }
 

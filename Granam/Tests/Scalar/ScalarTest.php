@@ -1,10 +1,10 @@
-<?php
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Granam\Tests\Tools\Scalar;
 
 use Granam\Scalar\Scalar;
 use Granam\Scalar\ScalarInterface;
+use Granam\Scalar\Tools\Exceptions\WrongParameterType;
 use PHPUnit\Framework\TestCase;
 
 class ScalarTest extends TestCase
@@ -102,52 +102,52 @@ class ScalarTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got NULL$~
      */
     public function I_can_not_use_it_with_null_by_default(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~got NULL$~');
         new Scalar(null);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got NULL$~
      */
     public function I_can_not_use_it_with_null_if_strict(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~got NULL$~');
         new Scalar(null, true /* strict */);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~array {}$~
      */
     public function I_can_not_use_array(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~array {}$~');
         /** @noinspection PhpParamsInspection */
         new Scalar([]);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got resource$~
      */
     public function I_can_not_use_resource(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~got resource$~');
         new Scalar(tmpfile());
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
      */
     public function I_can_not_use_standard_object(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegExp('~got instance of [\\\]stdClass$~');
         new Scalar(new \stdClass());
     }
 

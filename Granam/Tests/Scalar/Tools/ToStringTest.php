@@ -1,8 +1,8 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Granam\Tests\Scalar\Tools;
 
+use Granam\Scalar\Tools\Exceptions\WrongParameterType;
 use Granam\Scalar\Tools\ToString;
 use PHPUnit\Framework\TestCase;
 
@@ -53,52 +53,52 @@ class ToStringTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~^In strict mode .+got NULL$~
      */
     public function I_cannot_pass_through_with_null_by_default(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegexp('~^In strict mode .+got NULL$~');
         ToString::toString(null);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~In strict mode .+got NULL$~
      */
     public function I_cannot_pass_through_with_null_if_strict(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegexp('~In strict mode .+got NULL$~');
         ToString::toString(null, true /* strict */);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~array {}$~
      */
     public function Throws_exception_with_array(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegexp('~array {}$~');
         /** @noinspection PhpParamsInspection */
         ToString::toString([]);
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got resource$~
      */
     public function Throws_exception_with_resource(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegexp('~got resource$~');
         ToString::toString(\tmpfile());
     }
 
     /**
      * @test
-     * @expectedException \Granam\Scalar\Tools\Exceptions\WrongParameterType
-     * @expectedExceptionMessageRegExp ~got instance of [\\]stdClass$~
      */
     public function Throws_exception_with_object(): void
     {
+        $this->expectException(WrongParameterType::class);
+        $this->expectExceptionMessageRegexp('~got instance of [\\\]stdClass$~');
         ToString::toString(new \stdClass());
     }
 
