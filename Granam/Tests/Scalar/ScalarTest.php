@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Granam\Tests\Tools\Scalar;
+namespace Granam\Tests\Scalar;
 
 use Granam\Scalar\Scalar;
 use Granam\Scalar\ScalarInterface;
@@ -168,7 +168,7 @@ class ScalarTest extends TestCase
         $invalidToStringScalar = new TestInvalidToStringScalar('foo', false);
         $errors = [];
         set_error_handler(
-            function ($errorNumber) use (&$errors) {
+            static function ($errorNumber) use (&$errors) {
                 $errors[] = $errorNumber;
             },
             E_USER_WARNING

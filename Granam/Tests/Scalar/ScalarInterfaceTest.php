@@ -1,7 +1,6 @@
-<?php
-declare(strict_types = 1);
+<?php declare(strict_types = 1);
 
-namespace Granam\Tests\Tools\Scalar;
+namespace Granam\Tests\Scalar;
 
 use Granam\Scalar\ScalarInterface;
 use PHPUnit\Framework\TestCase;
