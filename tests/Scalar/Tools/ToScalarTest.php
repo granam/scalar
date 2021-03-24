@@ -39,7 +39,7 @@ class ToScalarTest extends TestCase
     public function I_cannot_pass_through_with_null_by_default(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~got NULL$~');
+        $this->expectExceptionMessageMatches('~got NULL$~');
         ToScalar::toScalar(null);
     }
 
@@ -49,7 +49,7 @@ class ToScalarTest extends TestCase
     public function I_cannot_pass_through_with_null_if_strict(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~got NULL$~');
+        $this->expectExceptionMessageMatches('~got NULL$~');
         ToScalar::toScalar(null, true /* strict */);
     }
 

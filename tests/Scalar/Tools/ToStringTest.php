@@ -57,7 +57,7 @@ class ToStringTest extends TestCase
     public function I_cannot_pass_through_with_null_by_default(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegexp('~^In strict mode .+got NULL$~');
+        $this->expectExceptionMessageMatches('~^In strict mode .+got NULL$~');
         ToString::toString(null);
     }
 
@@ -67,7 +67,7 @@ class ToStringTest extends TestCase
     public function I_cannot_pass_through_with_null_if_strict(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegexp('~In strict mode .+got NULL$~');
+        $this->expectExceptionMessageMatches('~In strict mode .+got NULL$~');
         ToString::toString(null, true /* strict */);
     }
 
@@ -77,7 +77,7 @@ class ToStringTest extends TestCase
     public function Throws_exception_with_array(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegexp('~array {}$~');
+        $this->expectExceptionMessageMatches('~array {}$~');
         /** @noinspection PhpParamsInspection */
         ToString::toString([]);
     }
@@ -88,7 +88,7 @@ class ToStringTest extends TestCase
     public function Throws_exception_with_resource(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegexp('~got resource$~');
+        $this->expectExceptionMessageMatches('~got resource$~');
         ToString::toString(\tmpfile());
     }
 
@@ -98,7 +98,7 @@ class ToStringTest extends TestCase
     public function Throws_exception_with_object(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegexp('~got instance of [\\\]stdClass$~');
+        $this->expectExceptionMessageMatches('~got instance of [\\\]stdClass$~');
         ToString::toString(new \stdClass());
     }
 

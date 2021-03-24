@@ -106,7 +106,7 @@ class ScalarTest extends TestCase
     public function I_can_not_use_it_with_null_by_default(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~got NULL$~');
+        $this->expectExceptionMessageMatches('~got NULL$~');
         new Scalar(null);
     }
 
@@ -116,7 +116,7 @@ class ScalarTest extends TestCase
     public function I_can_not_use_it_with_null_if_strict(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~got NULL$~');
+        $this->expectExceptionMessageMatches('~got NULL$~');
         new Scalar(null, true /* strict */);
     }
 
@@ -126,7 +126,7 @@ class ScalarTest extends TestCase
     public function I_can_not_use_array(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~array {}$~');
+        $this->expectExceptionMessageMatches('~array {}$~');
         /** @noinspection PhpParamsInspection */
         new Scalar([]);
     }
@@ -137,7 +137,7 @@ class ScalarTest extends TestCase
     public function I_can_not_use_resource(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~got resource$~');
+        $this->expectExceptionMessageMatches('~got resource$~');
         new Scalar(tmpfile());
     }
 
@@ -147,7 +147,7 @@ class ScalarTest extends TestCase
     public function I_can_not_use_standard_object(): void
     {
         $this->expectException(WrongParameterType::class);
-        $this->expectExceptionMessageRegExp('~got instance of [\\\]stdClass$~');
+        $this->expectExceptionMessageMatches('~got instance of [\\\]stdClass$~');
         new Scalar(new \stdClass());
     }
 
